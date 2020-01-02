@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Name="BinaryList"
+    x:Class="BinaryClock.Views.BinaryListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BinaryClock.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:BinaryClock.Converters"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="BinaryActiveBrush" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="BinaryInactiveBrush" Color="#55FFFFFF"/>
+        <converter:BooleanToBrushConverter x:Key="BooleanToBrushConverter" ActiveBrush="{StaticResource BinaryActiveBrush}" InactiveBrush="{StaticResource BinaryInactiveBrush}"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <ItemsControl ItemsSource="{Binding BinaryData, ElementName=BinaryList}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Fill="{Binding Converter={StaticResource BooleanToBrushConverter}}" Width="50" Height="50" Margin="6"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+    </Grid>
+</UserControl>
