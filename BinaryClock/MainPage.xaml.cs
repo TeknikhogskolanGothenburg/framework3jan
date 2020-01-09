@@ -31,27 +31,12 @@ namespace BinaryClock
             clock.Interval = TimeSpan.FromSeconds(1);
             clock.Tick += (o, e) => 
             {
-                UpdateViewModelForCurrentTime(DateTime.Now);
+                viewModel.Time = DateTime.Now;
             };
             clock.Start();
             return clock;
         }
 
-        private void UpdateViewModelForCurrentTime(DateTime currentTime)
-        {
-            var seconds = new int[] { currentTime.Second / 10, currentTime.Second % 10 };
-            var minutes = new int[] { currentTime.Minute / 10, currentTime.Minute % 10 };
-            var hours = new int[] { currentTime.Hour / 10, currentTime.Hour % 10 };
-            viewModel.TimeData = new List<IEnumerable<bool>>
-            {
-                IntegerToBooleanArrayConverter.ConvertToBools(hours[0], 2),
-                IntegerToBooleanArrayConverter.ConvertToBools(hours[1], 4),
-                IntegerToBooleanArrayConverter.ConvertToBools(minutes[0], 3),
-                IntegerToBooleanArrayConverter.ConvertToBools(minutes[1], 4),
-                IntegerToBooleanArrayConverter.ConvertToBools(seconds[0], 3),
-                IntegerToBooleanArrayConverter.ConvertToBools(seconds[1], 4),
-            };
-        }
 
         private Task BackgroundColorUpdate()
         {

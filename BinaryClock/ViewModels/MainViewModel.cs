@@ -33,17 +33,17 @@ namespace BinaryClock.ViewModels
             get { return new SolidColorBrush(BackgroundColor); }  
         }
 
-        private IEnumerable<IEnumerable<bool>> timeData;
+        private DateTime time;
 
-        public IEnumerable<IEnumerable<bool>> TimeData
+        public DateTime Time
         {
-            get { return timeData; }
+            get { return time; }
             set 
             {
-                if(timeData != value)
+                if(time != value)
                 { 
-                    timeData = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeData)));
+                    time = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Time)));
                 }
             }
         }
